@@ -14,7 +14,6 @@ public class PanGrid extends JPanel {
     boolean Flagon = false;
     PanMain parent;
     boolean FirstClick = true;
-    int nBombsss = 0;
 
     public PanGrid(int width, int length) {
         CreateGrid(width, length);
@@ -22,7 +21,6 @@ public class PanGrid extends JPanel {
 
     public void AddBomb() {
         boolean added = false;
-        nBombsss+=1;
         while (!added) {
             int randX = rand.nextInt(Length);
             int randY = rand.nextInt(Height);

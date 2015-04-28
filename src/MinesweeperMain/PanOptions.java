@@ -56,7 +56,6 @@ public class PanOptions extends JPanel implements Cloneable {
             @Override
             public void actionPerformed(ActionEvent event) {
                 JButton NewGame = (JButton) event.getSource();
-                parentOptions.parent.panGrid.nBombsss = 0;
                 parentOptions.parent.panGrid.KillGrid();
                 if (parentOptions.cb.getSelectedItem().equals("Easy")) {
                     parentOptions.parent.panGrid.BombNum = 10;
