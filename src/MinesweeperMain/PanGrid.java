@@ -30,7 +30,6 @@ public class PanGrid extends JPanel {
                 grid[randX][randY].bomb = true;
                 added = true;
             }
-            System.out.println(randX + ", " + randY + " #: "+ nBombsss);
         }
     }
 
@@ -99,6 +98,5 @@ public class PanGrid extends JPanel {
         grid[0][0].bomb = true;
         aThis.bomb = false;
         setnum();
-        //System.err.println("Error: Bomb on first click");
     }
 }
