@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 public class PanGrid extends JPanel {
 
-    Tile[][] grid;
+    BtnTile[][] grid;
     int Length, Height;
     int BombNum = 10;
     Random rand;
@@ -47,10 +47,10 @@ public class PanGrid extends JPanel {
         Length = length;
         Height = height;
         this.setLayout(new GridLayout(Height, Length));
-        grid = new Tile[Length][Height];
+        grid = new BtnTile[Length][Height];
         for (int y = 0; y < Height; y++) {
             for (int x = 0; x < Length; x++) {
-                grid[x][y] = new Tile();
+                grid[x][y] = new BtnTile();
                 grid[x][y].init(x, y);
                 grid[x][y].parentGrid = this;
                 this.add(grid[x][y]);
@@ -92,7 +92,7 @@ public class PanGrid extends JPanel {
         }
     }
 
-    void resetBomb(Tile aThis) {
+    void resetBomb(BtnTile aThis) {
         grid[0][0].bomb = true;
         aThis.bomb = false;
         setnum();

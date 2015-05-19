@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 
-public class Tile extends JButton implements ActionListener {
+public class BtnTile extends JButton implements ActionListener {
 
     Point position;
     boolean bomb = false;
@@ -94,8 +94,8 @@ public class Tile extends JButton implements ActionListener {
         }
     }
 
-    public ArrayList<Tile> getAdjacentTiles() {
-        ArrayList<Tile> tileList = new ArrayList();
+    public ArrayList<BtnTile> getAdjacentTiles() {
+        ArrayList<BtnTile> tileList = new ArrayList();
 
         for (int i = 0; i < 8; i++) {
             Directions d = Directions.values()[i];
