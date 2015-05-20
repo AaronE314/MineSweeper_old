@@ -9,7 +9,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class PanOptions extends JPanel implements Cloneable {
+public class PanOptions extends JPanel{ 
 
     PanMain parent;
     JComboBox<String> cb;
