@@ -10,25 +10,24 @@ import javax.swing.JButton;
 public class BtnTile extends JButton implements ActionListener {
 
     Point position;
-    boolean bomb = false;
-    int value;
+    boolean isBomb = false;
+    int nValue;
     public PanGrid parentGrid;
     boolean revealed = false;
-    boolean Shift = false;
     boolean Flaged = false;
 
     enum Directions {
 
         Up(new Point(0, 1)), Down(new Point(0, -1)), Right(new Point(1, 0)), Left(new Point(-1, 0)),
         UpRight(new Point(1, 1)), DownRight(new Point(1, -1)), UpLeft(new Point(-1, 1)), DownLeft(new Point(-1, -1));
-        private Point value;
+        private Point nValue;
 
-        Directions(Point value) {
-            this.value = value;
+        Directions(Point nValue) {
+            this.nValue = nValue;
         }
 
         public Point getValue() {
-            return value;
+            return nValue;
         }
     }
 
@@ -65,7 +64,7 @@ public class BtnTile extends JButton implements ActionListener {
     public void reveal() {
         
         revealed = true;
-        if (bomb) {
+        if (isBomb) {
             if (!parentGrid.FirstClick) {
                 setBackground(Color.RED);
                 parentGrid.revealAll();
@@ -75,12 +74,12 @@ public class BtnTile extends JButton implements ActionListener {
             }
         } else {
             setBackground(Color.WHITE);
-            if (value != 0) {
-                setText(String.valueOf(value));
+            if (nValue != 0) {
+                setText(String.valueOf(nValue));
             }
         }
 
-        if (value == 0 && !bomb) {
+        if (nValue == 0 && !isBomb) {
             revealAround();
         }
         parentGrid.FirstClick = false;
@@ -88,7 +87,7 @@ public class BtnTile extends JButton implements ActionListener {
 
     void revealAround() {
         for (int i = 0; i < getAdjacentTiles().size(); i++) {
-            if (!getAdjacentTiles().get(i).bomb && !getAdjacentTiles().get(i).revealed && !Flaged) {
+            if (!getAdjacentTiles().get(i).isBomb && !getAdjacentTiles().get(i).revealed && !Flaged) {
                 getAdjacentTiles().get(i).reveal();
             }
         }

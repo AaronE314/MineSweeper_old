@@ -24,8 +24,8 @@ public class PanGrid extends JPanel {
         while (!added) {
             int randX = rand.nextInt(Length);
             int randY = rand.nextInt(Height);
-            if (!grid[randX][randY].bomb && !(randX == 0 && randY == 0)) {
-                grid[randX][randY].bomb = true;
+            if (!grid[randX][randY].isBomb && !(randX == 0 && randY == 0)) {
+                grid[randX][randY].isBomb = true;
                 added = true;
             }
         }
@@ -73,11 +73,11 @@ public class PanGrid extends JPanel {
             for (int j = 0; j < Height; j++) {
                 int bombsAround = 0;
                 for (int k = 0; k < grid[i][j].getAdjacentTiles().size(); k++) {
-                    if (grid[i][j].getAdjacentTiles().get(k).bomb) {
+                    if (grid[i][j].getAdjacentTiles().get(k).isBomb) {
                         bombsAround += 1;
                     }
                 }
-                grid[i][j].value = bombsAround;
+                grid[i][j].nValue = bombsAround;
             }
         }
     }
@@ -93,8 +93,8 @@ public class PanGrid extends JPanel {
     }
 
     void resetBomb(BtnTile aThis) {
-        grid[0][0].bomb = true;
-        aThis.bomb = false;
+        grid[0][0].isBomb = true;
+        aThis.isBomb = false;
         setnum();
     }
 }
