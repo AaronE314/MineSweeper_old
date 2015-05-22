@@ -16,6 +16,7 @@ public class PanOptions extends JPanel{
     JLabel lbBombs;
     public static int nBombs;
 
+    
     public PanOptions() {
         this.setLayout(new GridLayout(10, 1));
         JButton Flag = new JButton("Flag");
