@@ -76,6 +76,32 @@ public class BtnTile extends JButton implements ActionListener {
             setBackground(Color.WHITE);
             if (nValue != 0) {
                 setText(String.valueOf(nValue));
+                switch (nValue) {
+                    case 1:
+                        setForeground(Color.BLUE);
+                        break;
+                    case 2:
+                        setForeground(Color.GREEN);
+                        break;
+                    case 3:
+                        setForeground(Color.RED);
+                        break;
+                    case 4:
+                        setForeground(new Color(00, 00, 100));//Dark Blue
+                        break;
+                    case 5:
+                        setForeground(new Color(165, 102, 21));//Brown
+                        break;
+                    case 6:
+                        setForeground(Color.CYAN);
+                        break;
+                    case 7:
+                        setForeground(Color.BLACK);
+                        break;
+                    case 8:
+                        setForeground(Color.GRAY);
+                        break;
+                }
             }
         }
 
