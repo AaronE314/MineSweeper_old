@@ -109,6 +109,9 @@ public class BtnTile extends JButton implements ActionListener {
             revealAround();
         }
         parentGrid.FirstClick = false;
+        if (Flaged) {
+            parentGrid.parent.panOptions.UpdateBombLabel(1);
+        }
     }
 
     void revealAround() {
