@@ -62,7 +62,7 @@ public class BtnTile extends JButton implements ActionListener {
     }
 
     public void reveal() {
-        
+
         revealed = true;
         if (isBomb) {
             if (!parentGrid.FirstClick) {

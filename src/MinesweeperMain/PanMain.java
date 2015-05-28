@@ -9,6 +9,7 @@ public class PanMain extends JPanel {
     PanGrid panGrid = new PanGrid(9, 9);
     PanOptions panOptions = new PanOptions();
     JFrame parent;
+
     public PanMain() {
         panGrid.parent = (this);
         panOptions.parent = (this);
@@ -18,6 +19,4 @@ public class PanMain extends JPanel {
         panOptions.nBombs = panGrid.BombNum;
         panOptions.SetBombLabel(panGrid.BombNum);
     }
-    
-    
 }
