@@ -24,14 +24,14 @@ public class BtnTile extends JButton implements ActionListener {
 
         Up(new Point(0, 1)), Down(new Point(0, -1)), Right(new Point(1, 0)), Left(new Point(-1, 0)),
         UpRight(new Point(1, 1)), DownRight(new Point(1, -1)), UpLeft(new Point(-1, 1)), DownLeft(new Point(-1, -1));
-        private Point nValue;
+        private Point pValue;
 
         Directions(Point nValue) {
-            this.nValue = nValue;
+            this.pValue = nValue;
         }
 
         public Point getValue() {
-            return nValue;
+            return pValue;
         }
     }
 

@@ -4,15 +4,21 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 public class PanOptions extends JPanel {
 
     PanMain parent;
-    JComboBox<String> cb;
+    JComboBox<String> cbDif;
     JLabel lbBombs;
     public static int nBombs;
 
@@ -21,12 +27,33 @@ public class PanOptions extends JPanel {
         JButton Flag = new JButton("Flag");
         JButton NewGame = new JButton("New Game");
         String[] choices = {"Easy", "Medium", "Hard"};
-        cb = new JComboBox<String>(choices);
-        cb.setVisible(true);
+        cbDif = new JComboBox<String>(choices);
+        cbDif.setVisible(true);
+        this.setFocusable(true);
         Flag.setBackground(Color.RED);
         add(Flag);
-        add(cb);
+        add(cbDif);
         add(NewGame);
+        Flag.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyReleased(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                System.out.println("Button was clicked");
+            }
+        });
+        InputMap im = Flag.getInputMap(WHEN_IN_FOCUSED_WINDOW);
+            ActionMap am = Flag.getActionMap();
+            im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F, 0), "clickMe");
+            am.put("clickMe", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JButton btn = (JButton) e.getSource();
+                    btn.doClick();
+                }
+            });
 
         class FlagModeListener implements ActionListener {
 
@@ -57,13 +84,13 @@ public class PanOptions extends JPanel {
             public void actionPerformed(ActionEvent event) {
                 JButton NewGame = (JButton) event.getSource();
                 parentOptions.parent.panGrid.KillGrid();
-                if (parentOptions.cb.getSelectedItem().equals("Easy")) {
+                if (parentOptions.cbDif.getSelectedItem().equals("Easy")) {
                     parentOptions.parent.panGrid.BombNum = 10;
                     parentOptions.parent.panGrid.CreateGrid(9, 9);
-                } else if (parentOptions.cb.getSelectedItem().equals("Medium")) {
+                } else if (parentOptions.cbDif.getSelectedItem().equals("Medium")) {
                     parentOptions.parent.panGrid.BombNum = 30;
                     parentOptions.parent.panGrid.CreateGrid(15, 15);
-                } else if (parentOptions.cb.getSelectedItem().equals("Hard")) {
+                } else if (parentOptions.cbDif.getSelectedItem().equals("Hard")) {
                     parentOptions.parent.panGrid.BombNum = 50;
                     parentOptions.parent.panGrid.CreateGrid(20, 20);
                 }
