@@ -14,6 +14,7 @@ public class PanGrid extends JPanel {
     boolean Flagon = false;
     PanMain parent;
     boolean FirstClick = true;
+    boolean hitBomb = false;
 
     public PanGrid(int width, int length) {
         CreateGrid(width, length);
@@ -42,6 +43,7 @@ public class PanGrid extends JPanel {
     }
 
     void CreateGrid(int height, int length) {
+        hitBomb = false;
         FirstClick = true;
         rand = new Random();
         Length = length;
@@ -96,5 +98,36 @@ public class PanGrid extends JPanel {
         grid[0][0].isBomb = true;
         aThis.isBomb = false;
         setnum();
+    }
+
+    boolean checkWin() {
+        if (hitBomb){
+            return false;
+        }
+        for (int i = 0; i < Length; i++) {
+            for (int j = 0; j < Height; j++) {
+                if (!grid[i][j].revealed && !grid[i][j].isBomb) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    void win(){
+        boolean even = false;
+        for (int i = 0; i < Length; i++) {
+            for (int j = 0; j < Height; j++) {
+                grid[i][j].isPink = even;
+                even = !even;
+            }
+        }
+        
+        for (int i = 0; i < Length; i++) {
+            for (int j = 0; j < Height; j++) {
+                grid[i][j].setText("");
+                grid[i][j].DANCEPARTAY();
+            }
+        }
     }
 }

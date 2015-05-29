@@ -1,17 +1,21 @@
 package MinesweeperMain;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.Timer;
 
 public class BtnTile extends JButton implements ActionListener {
 
+    boolean isPink = true;
     Point position;
     boolean isBomb = false;
     int nValue;
+    Color arColours[] = {Color.BLUE, new Color(21, 148, 8), Color.RED, new Color(00, 00, 100), new Color(165, 102, 21), new Color(0, 185, 185), Color.BLACK, Color.GRAY};
     public PanGrid parentGrid;
     boolean revealed = false;
     boolean Flaged = false;
@@ -62,11 +66,11 @@ public class BtnTile extends JButton implements ActionListener {
     }
 
     public void reveal() {
-
         revealed = true;
         if (isBomb) {
             if (!parentGrid.FirstClick) {
                 setBackground(Color.RED);
+                parentGrid.hitBomb = true;
                 parentGrid.revealAll();
             } else {
                 parentGrid.resetBomb(this);
@@ -76,32 +80,11 @@ public class BtnTile extends JButton implements ActionListener {
             setBackground(Color.WHITE);
             if (nValue != 0) {
                 setText(String.valueOf(nValue));
-                switch (nValue) {
-                    case 1:
-                        setForeground(Color.BLUE);
-                        break;
-                    case 2:
-                        setForeground(Color.GREEN);
-                        break;
-                    case 3:
-                        setForeground(Color.RED);
-                        break;
-                    case 4:
-                        setForeground(new Color(00, 00, 100));//Dark Blue
-                        break;
-                    case 5:
-                        setForeground(new Color(165, 102, 21));//Brown
-                        break;
-                    case 6:
-                        setForeground(Color.CYAN);
-                        break;
-                    case 7:
-                        setForeground(Color.BLACK);
-                        break;
-                    case 8:
-                        setForeground(Color.GRAY);
-                        break;
-                }
+                setFont(new Font("Arial", Font.BOLD, 16));//Serif
+                setForeground(arColours[(nValue - 1)]);
+            }
+            if (parentGrid.checkWin()) {
+                parentGrid.win();
             }
         }
 
@@ -134,5 +117,21 @@ public class BtnTile extends JButton implements ActionListener {
         }
 
         return tileList;
+    }
+
+    public void DANCEPARTAY() {
+        ActionListener taskPerformer = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                if (isPink) {
+                    setBackground(Color.pink);
+                } else {
+                    setBackground(Color.blue);
+                }
+                isPink = !isPink;
+            }
+        };
+        new Timer(300, taskPerformer).start();
+
     }
 }
