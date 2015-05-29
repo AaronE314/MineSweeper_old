@@ -34,16 +34,6 @@ public class PanOptions extends JPanel {
         add(Flag);
         add(cbDif);
         add(NewGame);
-        Flag.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyReleased(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                System.out.println("Button was clicked");
-            }
-        });
         InputMap im = Flag.getInputMap(WHEN_IN_FOCUSED_WINDOW);
             ActionMap am = Flag.getActionMap();
             im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F, 0), "clickMe");
