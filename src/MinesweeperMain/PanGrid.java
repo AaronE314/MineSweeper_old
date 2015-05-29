@@ -2,7 +2,11 @@ package MinesweeperMain;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.io.File;
 import java.util.Random;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JPanel;
 
 public class PanGrid extends JPanel {
@@ -18,6 +22,7 @@ public class PanGrid extends JPanel {
 
     public PanGrid(int width, int length) {
         CreateGrid(width, length);
+        playSound("New_Game.wav");
     }
 
     public void AddBomb() {
@@ -101,7 +106,7 @@ public class PanGrid extends JPanel {
     }
 
     boolean checkWin() {
-        if (hitBomb){
+        if (hitBomb) {
             return false;
         }
         for (int i = 0; i < Length; i++) {
@@ -113,8 +118,8 @@ public class PanGrid extends JPanel {
         }
         return true;
     }
-    
-    void win(){
+
+    void win() {
         boolean even = false;
         for (int i = 0; i < Length; i++) {
             for (int j = 0; j < Height; j++) {
@@ -122,12 +127,29 @@ public class PanGrid extends JPanel {
                 even = !even;
             }
         }
-        
+
         for (int i = 0; i < Length; i++) {
             for (int j = 0; j < Height; j++) {
                 grid[i][j].setText("");
-                grid[i][j].DANCEPARTAY();
+                grid[i][j].WinAnum();
             }
         }
+    }
+
+    void playSound(final String url) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    File fSound = new File(url);
+                    Clip clip = AudioSystem.getClip();
+                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(fSound);
+                    clip.open(inputStream);
+                    clip.start();
+                } catch (Exception e) {
+                    System.err.println(e.getMessage());
+                }
+            }
+        }).start();
     }
 }

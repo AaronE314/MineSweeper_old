@@ -43,8 +43,12 @@ public class BtnTile extends JButton implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         if (!parentGrid.Flagon) {
+            if(isBomb){
+                parentGrid.playSound("Long_Bomb.wav");
+            }else{
+                parentGrid.playSound("Click.wav");
+            }
             reveal();
         } else {
             if (parentGrid.parent.panOptions.nBombs > 0) {
@@ -119,7 +123,7 @@ public class BtnTile extends JButton implements ActionListener {
         return tileList;
     }
 
-    public void DANCEPARTAY() {
+    public void WinAnum() {
         ActionListener taskPerformer = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {

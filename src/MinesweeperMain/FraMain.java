@@ -11,7 +11,7 @@ public class FraMain extends JFrame {
         panMain.parent = this;
         setSize(width, height);
         setTitle("Minesweeper");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(panMain);
         setVisible(true);
     }
