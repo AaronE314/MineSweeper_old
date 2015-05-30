@@ -127,7 +127,7 @@ public class PanGrid extends JPanel {
 //                even = !even;
 //            }
 //        }
-        for (int i = Length; i > 0; i--) {
+        for (int i = 0; i < 0; i++) {
             for (int j = 0; j < Height; j++) {
                 grid[i][j].WinAnum();
             }

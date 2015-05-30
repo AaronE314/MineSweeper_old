@@ -88,6 +88,7 @@ public class BtnTile extends JButton implements ActionListener {
                 setForeground(arColours[(nValue - 1)]);
             }
             if (parentGrid.checkWin()) {
+                parentGrid.playSound("Win.wav");
                 parentGrid.win();
             }
         }

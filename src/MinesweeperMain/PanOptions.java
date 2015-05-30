@@ -75,7 +75,7 @@ public class PanOptions extends JPanel {
                 JButton NewGame = (JButton) event.getSource();
                 parentOptions.parent.panGrid.KillGrid();
                 if (parentOptions.cbDif.getSelectedItem().equals("Easy")) {
-                    parentOptions.parent.panGrid.BombNum = 10;
+                    parentOptions.parent.panGrid.BombNum = 2;
                     parentOptions.parent.panGrid.CreateGrid(9, 9);
                 } else if (parentOptions.cbDif.getSelectedItem().equals("Medium")) {
                     parentOptions.parent.panGrid.BombNum = 30;
