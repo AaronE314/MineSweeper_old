@@ -11,7 +11,7 @@ import javax.swing.Timer;
 
 public class BtnTile extends JButton implements ActionListener {
 
-    boolean isPink = true;
+    boolean isColoured = true;
     Point position;
     boolean isBomb = false;
     int nValue;
@@ -127,12 +127,12 @@ public class BtnTile extends JButton implements ActionListener {
         ActionListener taskPerformer = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                if (isPink) {
-                    setBackground(Color.pink);
+                if (isColoured) {
+                    setBackground(Color.BLUE);
                 } else {
-                    setBackground(Color.blue);
+                    setBackground(Color.WHITE);
                 }
-                isPink = !isPink;
+                isColoured = !isColoured;
             }
         };
         new Timer(300, taskPerformer).start();

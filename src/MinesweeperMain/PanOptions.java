@@ -88,9 +88,9 @@ public class PanOptions extends JPanel {
         }
 
         ActionListener FlagModeListener = new FlagModeListener();
-        ActionListener tempNGListener = new NGListener(this);
+        ActionListener NGListener = new NGListener(this);
         Flag.addActionListener(FlagModeListener);
-        NewGame.addActionListener(tempNGListener);
+        NewGame.addActionListener(NGListener);
     }
 
     void SetBombLabel(int n) {

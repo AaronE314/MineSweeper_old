@@ -120,17 +120,15 @@ public class PanGrid extends JPanel {
     }
 
     void win() {
-        boolean even = false;
-        for (int i = 0; i < Length; i++) {
+//        boolean even = false;
+//        for (int i = 0; i < Length; i++) {
+//            for (int j = 0; j < Height; j++) {
+//                grid[i][j].isColoured = even;
+//                even = !even;
+//            }
+//        }
+        for (int i = Length; i > 0; i--) {
             for (int j = 0; j < Height; j++) {
-                grid[i][j].isPink = even;
-                even = !even;
-            }
-        }
-
-        for (int i = 0; i < Length; i++) {
-            for (int j = 0; j < Height; j++) {
-                grid[i][j].setText("");
                 grid[i][j].WinAnum();
             }
         }
