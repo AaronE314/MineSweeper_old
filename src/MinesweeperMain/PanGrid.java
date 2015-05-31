@@ -22,8 +22,11 @@ public final class PanGrid extends JPanel {
     PanMain parent;
     boolean FirstClick = true;
     boolean hitBomb = false;
+    boolean won = false;
+    Color BGC;
 
     public PanGrid(int width, int length) {
+        BGC = Color.LIGHT_GRAY;
         CreateGrid(width, length);
         playSound("New_Game.wav");
     }
@@ -51,6 +54,7 @@ public final class PanGrid extends JPanel {
     }
 
     void CreateGrid(int height, int length) {
+        won = false;
         hitBomb = false;
         FirstClick = true;
         rand = new Random();
@@ -64,7 +68,7 @@ public final class PanGrid extends JPanel {
                 grid[x][y].init(x, y);
                 grid[x][y].parentGrid = this;
                 this.add(grid[x][y]);
-                grid[x][y].setBackground(Color.LIGHT_GRAY);
+                grid[x][y].setBackground(BGC);
             }
         }
         for (int i = 0; i < BombNum; i++) {
@@ -123,6 +127,8 @@ public final class PanGrid extends JPanel {
     }
 
     void win() {
+        won = true;
+        playSound("Win.wav");
 //        boolean even = false;
 //        for (int i = 0; i < Length; i++) {
 //            for (int j = 0; j < Height; j++) {

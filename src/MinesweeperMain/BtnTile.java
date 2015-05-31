@@ -46,7 +46,7 @@ public class BtnTile extends JButton implements ActionListener {
         if (!parentGrid.Flagon) {
             if(isBomb){
                 parentGrid.playSound("Long_Bomb.wav");
-            }else{
+            }else if (!revealed){
                 parentGrid.playSound("Click.wav");
             }
             reveal();
@@ -57,12 +57,12 @@ public class BtnTile extends JButton implements ActionListener {
                     Flaged = true;
                     parentGrid.parent.panOptions.UpdateBombLabel(-1);
                 } else if (Flaged && !revealed) {
-                    setBackground(Color.LIGHT_GRAY);
+                    setBackground(PanOptions.getcolour());
                     Flaged = false;
                     parentGrid.parent.panOptions.UpdateBombLabel(1);
                 }
             } else if (Flaged && !revealed) {
-                setBackground(Color.LIGHT_GRAY);
+                setBackground(parentGrid.BGC);
                 Flaged = false;
                 parentGrid.parent.panOptions.UpdateBombLabel(1);
             }
@@ -88,7 +88,6 @@ public class BtnTile extends JButton implements ActionListener {
                 setForeground(arColours[(nValue - 1)]);
             }
             if (parentGrid.checkWin()) {
-                parentGrid.playSound("Win.wav");
                 parentGrid.win();
             }
         }

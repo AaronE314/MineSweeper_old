@@ -18,6 +18,7 @@ public class PanOptions extends JPanel {
 
     PanMain parent;
     JComboBox<String> cbDif;
+    public static JComboBox<String> cbColour;
     JLabel lbBombs;
     public static int nBombs;
 
@@ -25,24 +26,28 @@ public class PanOptions extends JPanel {
         this.setLayout(new GridLayout(10, 1));
         JButton Flag = new JButton("Flag");
         JButton NewGame = new JButton("New Game");
-        String[] choices = {"Easy", "Medium", "Hard"};
-        cbDif = new JComboBox<String>(choices);
+        String[] Difchoices = {"Easy", "Medium", "Hard"};
+        String[] Colchoices = {"Gray", "Blue", "Green"};
+        cbDif = new JComboBox<String>(Difchoices);
+        cbColour = new JComboBox<String>(Colchoices);
         cbDif.setVisible(true);
+        cbColour.setVisible(true);
         this.setFocusable(true);
         Flag.setBackground(Color.RED);
         add(Flag);
         add(cbDif);
+        add(cbColour);
         add(NewGame);
         InputMap im = Flag.getInputMap(WHEN_IN_FOCUSED_WINDOW);
-            ActionMap am = Flag.getActionMap();
-            im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F, 0), "clickMe");
-            am.put("clickMe", new AbstractAction() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JButton btn = (JButton) e.getSource();
-                    btn.doClick();
-                }
-            });
+        ActionMap am = Flag.getActionMap();
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F, 0), "clickMe");
+        am.put("clickMe", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JButton btn = (JButton) e.getSource();
+                btn.doClick();
+            }
+        });
 
         class FlagModeListener implements ActionListener {
 
@@ -74,6 +79,7 @@ public class PanOptions extends JPanel {
                 parentOptions.parent.panGrid.playSound("New_Game.wav");
                 JButton NewGame = (JButton) event.getSource();
                 parentOptions.parent.panGrid.KillGrid();
+                parentOptions.parent.panGrid.BGC = getcolour();
                 if (parentOptions.cbDif.getSelectedItem().equals("Easy")) {
                     parentOptions.parent.panGrid.BombNum = 10;
                     parentOptions.parent.panGrid.CreateGrid(9, 9);
@@ -107,5 +113,15 @@ public class PanOptions extends JPanel {
         nBombs += n;
         lbBombs.setText("There are " + Integer.toString(nBombs) + " bombs left");
     }
-    
+
+    public static Color getcolour() {
+        if (cbColour.getSelectedItem().equals("Blue")) {
+            return (new Color(1, 97, 255));
+        } else if (cbColour.getSelectedItem().equals("Green")) {
+            return (new Color(13, 177, 17));
+        } else {
+            return Color.LIGHT_GRAY;
+        }
+    }
+
 }
