@@ -11,7 +11,8 @@ import javax.swing.Timer;
 
 public class BtnTile extends JButton implements ActionListener {
 
-    boolean isColoured = true;
+    int nWinIteration = 0;
+    int nColorIteration = 0;
     Point position;
     boolean isBomb = false;
     int nValue;
@@ -123,19 +124,29 @@ public class BtnTile extends JButton implements ActionListener {
         return tileList;
     }
 
-    public void WinAnum() {
+    public void WinAnim(int nDelay, int nIteration) {
+        nColorIteration = nIteration;
         ActionListener taskPerformer = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                if (isColoured) {
-                    setBackground(Color.BLUE);
-                } else {
-                    setBackground(Color.WHITE);
+                
+                nWinIteration += 1;
+                if (nWinIteration == nColorIteration) {
+                    if (isBomb){
+                        setBackground(Color.ORANGE);
+                    }else{
+                        setBackground(Color.BLUE);
+                    }
+                }else if (nWinIteration > nColorIteration){
+                    if (isBomb){
+                        setBackground(Color.ORANGE);
+                    }else{
+                        setBackground(Color.WHITE);
+                    }
                 }
-                isColoured = !isColoured;
             }
         };
-        new Timer(300, taskPerformer).start();
+        new Timer(nDelay, taskPerformer).start();
 
     }
 }

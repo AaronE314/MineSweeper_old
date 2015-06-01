@@ -136,9 +136,11 @@ public final class PanGrid extends JPanel {
 //                even = !even;
 //            }
 //        }
-        for (int i = 0; i < 0; i++) {
-            for (int j = 0; j < Height; j++) {
-                grid[i][j].WinAnum();
+        int nDelay = Math.round(1600 / Height);
+        for (int i = 0; i < Height; i++) {
+            for (int j = 0; j < Length; j++) {
+                System.out.print("Tyler is a (FAKE) WIZARD (or a (FAKE) hacker, one of the two)");
+                grid[j][i].WinAnim(nDelay, (Height - i));
             }
         }
     }
