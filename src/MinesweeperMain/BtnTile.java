@@ -133,13 +133,13 @@ public class BtnTile extends JButton implements ActionListener {
                 nWinIteration += 1;
                 if (nWinIteration == nColorIteration) {
                     if (isBomb){
-                        setBackground(Color.ORANGE);
+                        setBackground(Color.MAGENTA);
                     }else{
                         setBackground(Color.BLUE);
                     }
                 }else if (nWinIteration > nColorIteration){
                     if (isBomb){
-                        setBackground(Color.ORANGE);
+                        setBackground(Color.MAGENTA);
                     }else{
                         setBackground(Color.WHITE);
                     }

@@ -27,7 +27,7 @@ public class PanOptions extends JPanel {
         JButton Flag = new JButton("Flag");
         JButton NewGame = new JButton("New Game");
         String[] Difchoices = {"Easy", "Medium", "Hard"};
-        String[] Colchoices = {"Gray", "Blue", "Green"};
+        String[] Colchoices = {"Gray", "Blue", "Green", "Orange"};
         cbDif = new JComboBox<String>(Difchoices);
         cbColour = new JComboBox<String>(Colchoices);
         cbDif.setVisible(true);
@@ -119,8 +119,11 @@ public class PanOptions extends JPanel {
             return (new Color(1, 97, 255));
         } else if (cbColour.getSelectedItem().equals("Green")) {
             return (new Color(13, 177, 17));
+        } else if (cbColour.getSelectedItem().equals("Orange")) {
+            return (Color.ORANGE);
         } else {
             return Color.LIGHT_GRAY;
+            
         }
     }
 
