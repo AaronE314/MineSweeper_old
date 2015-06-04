@@ -38,6 +38,7 @@ public class PanOptions extends JPanel {
         add(cbDif);
         add(cbColour);
         add(NewGame);
+        //Key map for activating Flag mode with F
         InputMap im = Flag.getInputMap(WHEN_IN_FOCUSED_WINDOW);
         ActionMap am = Flag.getActionMap();
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F, 0), "clickMe");
@@ -48,7 +49,8 @@ public class PanOptions extends JPanel {
                 btn.doClick();
             }
         });
-
+        
+        //Listenter For Flag Mode
         class FlagModeListener implements ActionListener {
 
             boolean Flagon = false;
@@ -67,6 +69,8 @@ public class PanOptions extends JPanel {
                 }
             }
         }
+        
+        //Listener for new Game
         class NGListener implements ActionListener {
 
             NGListener(PanOptions parentOptions) {
@@ -76,6 +80,7 @@ public class PanOptions extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent event) {
+                //Setting Difficulty for new Game
                 parentOptions.parent.panGrid.playSound("New_Game.wav");
                 JButton NewGame = (JButton) event.getSource();
                 parentOptions.parent.panGrid.KillGrid();
@@ -98,7 +103,8 @@ public class PanOptions extends JPanel {
         Flag.addActionListener(FlagModeListener);
         NewGame.addActionListener(NGListener);
     }
-
+    
+    //Setting amount of bombs left
     void SetBombLabel(int n) {
         try {
             nBombs = n;
@@ -108,12 +114,14 @@ public class PanOptions extends JPanel {
             add(lbBombs);
         }
     }
-
+    
+    //updating amount of bombs left
     void UpdateBombLabel(int n) {
         nBombs += n;
         lbBombs.setText("There are " + Integer.toString(nBombs) + " bombs left");
     }
-
+    
+    //Getting selected Tile Bacground Colour
     public static Color getcolour() {
         if (cbColour.getSelectedItem().equals("Blue")) {
             return (new Color(1, 97, 255));

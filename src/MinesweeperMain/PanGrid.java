@@ -30,7 +30,8 @@ public final class PanGrid extends JPanel {
         CreateGrid(width, length);
         playSound("New_Game.wav");
     }
-
+    
+    //Adding a bomb in a random location
     public void AddBomb() {
         boolean added = false;
         while (!added) {
@@ -42,7 +43,8 @@ public final class PanGrid extends JPanel {
             }
         }
     }
-
+    
+    //Removing entire grid
     public void KillGrid() {
         for (int y = 0; y < Length; y++) {
             for (int x = 0; x < Height; x++) {
@@ -53,6 +55,7 @@ public final class PanGrid extends JPanel {
         }
     }
 
+    //Create a new grid
     void CreateGrid(int height, int length) {
         won = false;
         hitBomb = false;
@@ -81,7 +84,8 @@ public final class PanGrid extends JPanel {
         setnum();
 
     }
-
+    
+    //Set the amount of bombs around each tile
     void setnum() {
         for (int i = 0; i < Length; i++) {
             for (int j = 0; j < Height; j++) {
@@ -95,7 +99,8 @@ public final class PanGrid extends JPanel {
             }
         }
     }
-
+    
+    //Reaveal the entire map
     void revealAll() {
         for (int i = 0; i < Length; i++) {
             for (int j = 0; j < Height; j++) {
@@ -106,12 +111,14 @@ public final class PanGrid extends JPanel {
         }
     }
 
+    //Fix bomb if first click is a bomb
     void resetBomb(BtnTile aThis) {
         grid[0][0].isBomb = true;
         aThis.isBomb = false;
         setnum();
     }
-
+    
+    //Check for if they won
     boolean checkWin() {
         if (hitBomb) {
             return false;
@@ -125,7 +132,8 @@ public final class PanGrid extends JPanel {
         }
         return true;
     }
-
+    
+    //Play a win anum
     void win() {
         won = true;
         playSound("Win.wav");
@@ -136,7 +144,8 @@ public final class PanGrid extends JPanel {
             }
         }
     }
-
+    
+    //Easy way to play sounds
     void playSound(final String url) {
         new Thread(new Runnable() {
             @Override

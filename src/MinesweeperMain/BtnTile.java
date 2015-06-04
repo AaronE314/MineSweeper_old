@@ -20,7 +20,8 @@ public class BtnTile extends JButton implements ActionListener {
     public PanGrid parentGrid;
     boolean revealed = false;
     boolean Flaged = false;
-
+    
+    //Setting all the directions around each tile
     enum Directions {
 
         Up(new Point(0, 1)), Down(new Point(0, -1)), Right(new Point(1, 0)), Left(new Point(-1, 0)),
@@ -35,16 +36,19 @@ public class BtnTile extends JButton implements ActionListener {
             return pValue;
         }
     }
-
+    
     public void init(int x, int y) {
         position = new Point(x, y);
         addActionListener(this);
 
     }
-
+    
+    //action listener for each tile
     @Override
     public void actionPerformed(ActionEvent e) {
+        //Checking if flag mode is enabled
         if (!parentGrid.Flagon) {
+            //if not it will play right sound and reveal the tile
             if(isBomb){
                 parentGrid.playSound("Long_Bomb.wav");
             }else if (!revealed){
@@ -52,6 +56,7 @@ public class BtnTile extends JButton implements ActionListener {
             }
             reveal();
         } else {
+            //if it is it will set the required info for it to flag or unflag it
             if (parentGrid.parent.panOptions.nBombs > 0) {
                 if (!revealed && !Flaged) {
                     setBackground(Color.YELLOW);
@@ -69,19 +74,25 @@ public class BtnTile extends JButton implements ActionListener {
             }
         }
     }
-
+    
+    //Reveal the tile
     public void reveal() {
         revealed = true;
+        //Checking if it is a bomb
         if (isBomb) {
+            //if it is check if its the first click
             if (!parentGrid.FirstClick) {
+                //if its not first click end game
                 setBackground(Color.RED);
                 parentGrid.hitBomb = true;
                 parentGrid.revealAll();
             } else {
+                //if it is first click set it to not be a bomb
                 parentGrid.resetBomb(this);
                 reveal();
             }
         } else {
+            //if its not a bomb then set the text of the button to number of bombs around
             setBackground(Color.WHITE);
             if (nValue != 0) {
                 setText(String.valueOf(nValue));
@@ -92,7 +103,8 @@ public class BtnTile extends JButton implements ActionListener {
                 parentGrid.win();
             }
         }
-
+        
+        //if there are 0 bombs around it start a chain reaction to reaval other tiles
         if (nValue == 0 && !isBomb) {
             revealAround();
         }
@@ -101,7 +113,8 @@ public class BtnTile extends JButton implements ActionListener {
             parentGrid.parent.panOptions.UpdateBombLabel(1);
         }
     }
-
+    
+    //Reveal tiles around each tile if not bomb
     void revealAround() {
         for (int i = 0; i < getAdjacentTiles().size(); i++) {
             if (!getAdjacentTiles().get(i).isBomb && !getAdjacentTiles().get(i).revealed && !Flaged) {
@@ -109,7 +122,7 @@ public class BtnTile extends JButton implements ActionListener {
             }
         }
     }
-
+    //Get the info for the tile at it is checking
     public ArrayList<BtnTile> getAdjacentTiles() {
         ArrayList<BtnTile> tileList = new ArrayList();
 
@@ -123,7 +136,8 @@ public class BtnTile extends JButton implements ActionListener {
 
         return tileList;
     }
-
+    
+    //The win animation
     public void WinAnim(int nDelay, int nIteration) {
         nColorIteration = nIteration;
         ActionListener taskPerformer = new ActionListener() {
