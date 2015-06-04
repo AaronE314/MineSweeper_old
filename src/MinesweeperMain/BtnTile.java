@@ -122,7 +122,7 @@ public class BtnTile extends JButton implements ActionListener {
             }
         }
     }
-    //Get the info for the tile at it is checking
+    //Gets an array of  the adjacent tiles
     public ArrayList<BtnTile> getAdjacentTiles() {
         ArrayList<BtnTile> tileList = new ArrayList();
 
