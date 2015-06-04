@@ -129,13 +129,6 @@ public final class PanGrid extends JPanel {
     void win() {
         won = true;
         playSound("Win.wav");
-//        boolean even = false;
-//        for (int i = 0; i < Length; i++) {
-//            for (int j = 0; j < Height; j++) {
-//                grid[i][j].isColoured = even;
-//                even = !even;
-//            }
-//        }
         int nDelay = Math.round(1600 / Height);
         for (int i = 0; i < Height; i++) {
             for (int j = 0; j < Length; j++) {
