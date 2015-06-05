@@ -26,7 +26,7 @@ public class PanOptions extends JPanel {
         this.setLayout(new GridLayout(10, 1));
         JButton Flag = new JButton("Flag");
         JButton NewGame = new JButton("New Game");
-        String[] Difchoices = {"Easy", "Medium", "Hard"};
+        String[] Difchoices = {"Easy", "Medium", "Hard", "Extreme", "Insanity"};
         String[] Colchoices = {"Gray", "Blue", "Green", "Orange"};
         cbDif = new JComboBox<String>(Difchoices);
         cbColour = new JComboBox<String>(Colchoices);
@@ -93,6 +93,12 @@ public class PanOptions extends JPanel {
                     parentOptions.parent.panGrid.CreateGrid(15, 15);
                 } else if (parentOptions.cbDif.getSelectedItem().equals("Hard")) {
                     parentOptions.parent.panGrid.BombNum = 50;
+                    parentOptions.parent.panGrid.CreateGrid(20, 20);
+                } else if (parentOptions.cbDif.getSelectedItem().equals("Extreme")) {
+                    parentOptions.parent.panGrid.BombNum = 125;
+                    parentOptions.parent.panGrid.CreateGrid(20, 20);
+                } else if (parentOptions.cbDif.getSelectedItem().equals("Insanity")) {
+                    parentOptions.parent.panGrid.BombNum = 395;
                     parentOptions.parent.panGrid.CreateGrid(20, 20);
                 }
             }
