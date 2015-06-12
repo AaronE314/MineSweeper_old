@@ -51,6 +51,7 @@ public class BtnTile extends JButton implements ActionListener {
             //if not it will play right sound and reveal the tile
             if(isBomb){
                 parentGrid.playSound("Long_Bomb.wav");
+                parentGrid.parent.panOptions.TimePassed.stop();
             }else if (!revealed){
                 parentGrid.playSound("Click.wav");
             }

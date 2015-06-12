@@ -30,7 +30,7 @@ public final class PanGrid extends JPanel {
         CreateGrid(width, length);
         playSound("New_Game.wav");
     }
-    
+
     //Adding a bomb in a random location
     public void AddBomb() {
         boolean added = false;
@@ -43,7 +43,7 @@ public final class PanGrid extends JPanel {
             }
         }
     }
-    
+
     //Removing entire grid
     public void KillGrid() {
         for (int y = 0; y < Length; y++) {
@@ -79,12 +79,16 @@ public final class PanGrid extends JPanel {
         }
         try {
             parent.panOptions.SetBombLabel(BombNum);
+            parent.panOptions.SetTimeLabel();
+            parent.panOptions.nTimePlayed = 0;
+            parent.panOptions.TimePassed.start();
         } catch (Exception Errorz) {
         }
+
         setnum();
 
     }
-    
+
     //Set the amount of bombs around each tile
     void setnum() {
         for (int i = 0; i < Length; i++) {
@@ -99,7 +103,7 @@ public final class PanGrid extends JPanel {
             }
         }
     }
-    
+
     //Reaveal the entire map
     void revealAll() {
         for (int i = 0; i < Length; i++) {
@@ -117,7 +121,7 @@ public final class PanGrid extends JPanel {
         aThis.isBomb = false;
         setnum();
     }
-    
+
     //Check for if they won
     boolean checkWin() {
         if (hitBomb) {
@@ -132,11 +136,12 @@ public final class PanGrid extends JPanel {
         }
         return true;
     }
-    
+
     //Play a win anum
     void win() {
         won = true;
         playSound("Win.wav");
+        parent.panOptions.TimePassed.stop();
         int nDelay = Math.round(1600 / Height);
         for (int i = 0; i < Height; i++) {
             for (int j = 0; j < Length; j++) {
@@ -144,7 +149,7 @@ public final class PanGrid extends JPanel {
             }
         }
     }
-    
+
     //Easy way to play sounds
     void playSound(final String url) {
         new Thread(new Runnable() {

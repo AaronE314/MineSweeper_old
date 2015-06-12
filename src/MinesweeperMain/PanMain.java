@@ -18,5 +18,7 @@ public class PanMain extends JPanel {
         add(panOptions, BorderLayout.EAST);
         panOptions.nBombs = panGrid.BombNum;
         panOptions.SetBombLabel(panGrid.BombNum);
+        panOptions.SetTimeLabel();
+        panOptions.TimePassed.start();
     }
 }

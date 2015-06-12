@@ -5,6 +5,10 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
@@ -13,16 +17,29 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.Timer;
 
 public class PanOptions extends JPanel {
 
     PanMain parent;
     JComboBox<String> cbDif;
     public static JComboBox<String> cbColour;
-    JLabel lbBombs;
-    public static int nBombs;
-
+    JLabel lbBombs, lbTime;
+    public static int nBombs, nTimePlayed = 0;
+    PrintWriter HSFile;
+    Timer TimePassed;
+    
     public PanOptions() {
+//        if(HSFile)
+//        try {
+//            HSFile.println("The first line");
+//            HSFile.println("The second line");
+//            HSFile = new PrintWriter("HighScores.txt", "UTF-8");
+//        } catch (IOException e) {
+//            
+//            
+//        }
+        TimePassed = new Timer(1000, TimePlayed);
         this.setLayout(new GridLayout(10, 1));
         JButton Flag = new JButton("Flag");
         JButton NewGame = new JButton("New Game");
@@ -49,7 +66,7 @@ public class PanOptions extends JPanel {
                 btn.doClick();
             }
         });
-        
+
         //Listenter For Flag Mode
         class FlagModeListener implements ActionListener {
 
@@ -69,7 +86,7 @@ public class PanOptions extends JPanel {
                 }
             }
         }
-        
+
         //Listener for new Game
         class NGListener implements ActionListener {
 
@@ -109,7 +126,7 @@ public class PanOptions extends JPanel {
         Flag.addActionListener(FlagModeListener);
         NewGame.addActionListener(NGListener);
     }
-    
+
     //Setting amount of bombs left
     void SetBombLabel(int n) {
         try {
@@ -120,13 +137,26 @@ public class PanOptions extends JPanel {
             add(lbBombs);
         }
     }
-    
+
     //updating amount of bombs left
     void UpdateBombLabel(int n) {
         nBombs += n;
         lbBombs.setText("There are " + Integer.toString(nBombs) + " bombs left");
     }
-    
+
+    void SetTimeLabel() {
+        try {
+            lbTime.setText("Time Played " + 0 + "Sec");
+        } catch (Exception theCommonCold2) {
+            lbTime = new JLabel("Time Played " + 0 + "Sec");
+            add(lbTime);
+        }
+    }
+
+    void UpdateTimeLabel(int nTime) {
+        lbTime.setText("Time Played " + nTime + "Sec");
+    }
+
     //Getting selected Tile Bacground Colour
     public static Color getcolour() {
         if (cbColour.getSelectedItem().equals("Blue")) {
@@ -137,8 +167,14 @@ public class PanOptions extends JPanel {
             return (Color.ORANGE);
         } else {
             return Color.LIGHT_GRAY;
-            
+
         }
     }
-
+    ActionListener TimePlayed = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            nTimePlayed++;
+            UpdateTimeLabel(nTimePlayed);
+        }
+    };
 }
