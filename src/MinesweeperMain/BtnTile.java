@@ -54,6 +54,7 @@ public class BtnTile extends JButton implements ActionListener {
                 parentGrid.parent.panOptions.TimePassed.stop();
             }else if (!revealed){
                 parentGrid.playSound("Click.wav");
+                parentGrid.parent.panOptions.TimePassed.start();
             }
             reveal();
         } else {

@@ -81,7 +81,6 @@ public final class PanGrid extends JPanel {
             parent.panOptions.SetBombLabel(BombNum);
             parent.panOptions.SetTimeLabel();
             parent.panOptions.nTimePlayed = 0;
-            parent.panOptions.TimePassed.start();
         } catch (Exception Errorz) {
         }
 
