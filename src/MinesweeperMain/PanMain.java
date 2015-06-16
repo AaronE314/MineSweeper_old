@@ -19,5 +19,8 @@ public class PanMain extends JPanel {
         panOptions.nBombs = panGrid.BombNum;
         panOptions.SetBombLabel(panGrid.BombNum);
         panOptions.SetTimeLabel();
+        panOptions.SetScoreLabel();
+        panOptions.GetScores("Easy.txt");
+        panOptions.SetScoreLabel(panOptions.highScore, panOptions.highScore2, panOptions.highScore3);
     }
 }

@@ -80,7 +80,7 @@ public final class PanGrid extends JPanel {
         try {
             parent.panOptions.SetBombLabel(BombNum);
             parent.panOptions.SetTimeLabel();
-            parent.panOptions.nTimePlayed = 0;
+            parent.panOptions.SetScoreLabel();
         } catch (Exception Errorz) {
         }
 
@@ -140,6 +140,7 @@ public final class PanGrid extends JPanel {
     void win() {
         won = true;
         playSound("Win.wav");
+        parent.panOptions.AddScore(parent.panOptions.nTimePlayed);
         parent.panOptions.TimePassed.stop();
         int nDelay = Math.round(1600 / Height);
         for (int i = 0; i < Height; i++) {

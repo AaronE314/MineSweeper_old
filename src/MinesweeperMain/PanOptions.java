@@ -27,21 +27,12 @@ public class PanOptions extends JPanel {
     JComboBox<String> cbDif;
     public static JComboBox<String> cbColour;
     JLabel lbBombs, lbTime, lbScore1, lbScore2, lbScore3, lbScoreHeader;
-    public static int nBombs, nTimePlayed = 0;
-    PrintWriter HSFile;
+    public static int nBombs;
     Timer TimePassed;
-    int highScore = 999, highScore2 = 999, highScore3 = 999;
+    int highScore = 999, highScore2 = 999, highScore3 = 999, nTimePlayed = 0;
+    String sDif = "Easy";
 
     public PanOptions() {
-//        if(HSFile)
-//        try {
-//            HSFile.println("The first line");
-//            HSFile.println("The second line");
-//            HSFile = new PrintWriter("HighScores.txt", "UTF-8");
-//        } catch (IOException e) {
-//            
-//            
-//        }
         TimePassed = new Timer(1000, TimePlayed);
         this.setLayout(new GridLayout(10, 1));
         JButton Flag = new JButton("Flag");
@@ -101,32 +92,33 @@ public class PanOptions extends JPanel {
             @Override
             public void actionPerformed(ActionEvent event) {
                 //Setting Difficulty for new Game
+                sDif = (String) parentOptions.cbDif.getSelectedItem();
                 parentOptions.TimePassed.stop();
                 parentOptions.parent.panGrid.playSound("New_Game.wav");
                 JButton NewGame = (JButton) event.getSource();
                 parentOptions.parent.panGrid.KillGrid();
                 parentOptions.parent.panGrid.BGC = getcolour();
-                if (parentOptions.cbDif.getSelectedItem().equals("Easy")) {
+                if (sDif.equals("Easy")) {
                     parentOptions.parent.panGrid.BombNum = 10;
                     parentOptions.parent.panGrid.CreateGrid(9, 9);
                     parentOptions.GetScores("Easy.txt");
                     parentOptions.UpdateScoreLabel(highScore, highScore2, highScore3);
-                } else if (parentOptions.cbDif.getSelectedItem().equals("Medium")) {
+                } else if (sDif.equals("Medium")) {
                     parentOptions.parent.panGrid.BombNum = 30;
                     parentOptions.parent.panGrid.CreateGrid(15, 15);
                     parentOptions.GetScores("Medium.txt");
                     parentOptions.UpdateScoreLabel(highScore, highScore2, highScore3);
-                } else if (parentOptions.cbDif.getSelectedItem().equals("Hard")) {
+                } else if (sDif.equals("Hard")) {
                     parentOptions.parent.panGrid.BombNum = 50;
                     parentOptions.parent.panGrid.CreateGrid(20, 20);
                     parentOptions.GetScores("Hard.txt");
                     parentOptions.UpdateScoreLabel(highScore, highScore2, highScore3);
-                } else if (parentOptions.cbDif.getSelectedItem().equals("Extreme")) {
+                } else if (sDif.equals("Extreme")) {
                     parentOptions.parent.panGrid.BombNum = 125;
                     parentOptions.parent.panGrid.CreateGrid(20, 20);
                     parentOptions.GetScores("Extreme.txt");
                     parentOptions.UpdateScoreLabel(highScore, highScore2, highScore3);
-                } else if (parentOptions.cbDif.getSelectedItem().equals("Insanity")) {
+                } else if (sDif.equals("Insanity")) {
                     parentOptions.parent.panGrid.BombNum = 395;
                     parentOptions.parent.panGrid.CreateGrid(20, 20);
                     parentOptions.GetScores("Insanity.txt");
@@ -167,19 +159,53 @@ public class PanOptions extends JPanel {
         }
     }
 
+    void SetScoreLabel() {
+        try {
+            lbScoreHeader.setText("High Scores");
+        } catch (Exception theCommonCold4) {
+            lbScoreHeader = new JLabel("High Scores");
+            add(lbScoreHeader);
+        }
+    }
+
     void UpdateTimeLabel(int nTime) {
         lbTime.setText("Time Played " + nTime + "Sec");
     }
 
     void SetScoreLabel(int Score1, int Score2, int Score3) {
         try {
-            lbScore1.setText("1. " + Score1);
-            lbScore2.setText("2. " + Score2);
-            lbScore3.setText("3. " + Score3);
+            if (Score1 == 999) {
+                lbScore1.setText("1. Not Set");
+            } else {
+                lbScore1.setText("1. " + Score1);
+            }
+            if (Score2 == 999) {
+                lbScore2.setText("2. Not Set");
+            } else {
+                lbScore2.setText("2. " + Score2);
+            }
+            if (Score3 == 999) {
+                lbScore3.setText("3. Not Set");
+            } else {
+                lbScore3.setText("3. " + Score3);
+            }
         } catch (Exception theCommonCold3) {
-            lbScore1 = new JLabel("1. " + Score1);
-            lbScore2 = new JLabel("2. " + Score2);
-            lbScore3 = new JLabel("3. " + Score3);
+            if (Score1 == 999) {
+                lbScore1 = new JLabel("1. Not Set");
+            } else {
+                lbScore1 = new JLabel("1. " + Score1);
+            }
+            if (Score2 == 999) {
+                lbScore2 = new JLabel("2. Not Set");
+            } else {
+                lbScore1 = new JLabel("1. " + Score1);
+            }
+            if (Score3 == 999) {
+                lbScore3 = new JLabel("3. Not Set");
+
+            } else {
+                lbScore1 = new JLabel("1. " + Score1);
+            }
             add(lbScore1);
             add(lbScore2);
             add(lbScore3);
@@ -187,9 +213,21 @@ public class PanOptions extends JPanel {
     }
 
     void UpdateScoreLabel(int Score1, int Score2, int Score3) {
-        lbScore1.setText("1. " + Score1);
-        lbScore2.setText("2. " + Score2);
-        lbScore3.setText("3. " + Score3);
+        if (Score1 == 999) {
+            lbScore1.setText("1. Not Set");
+        } else {
+            lbScore1.setText("1. " + Score1);
+        }
+        if (Score2 == 999) {
+            lbScore2.setText("2. Not Set");
+        } else {
+            lbScore2.setText("2. " + Score2);
+        }
+        if (Score3 == 999) {
+            lbScore3.setText("3. Not Set");
+        } else {
+            lbScore3.setText("3. " + Score3);
+        }
     }
 
     //Getting selected Tile Bacground Colour
@@ -214,7 +252,9 @@ public class PanOptions extends JPanel {
     };
 
     void GetScores(String file) {
-
+        highScore = 999;
+        highScore2 = 999;
+        highScore3 = 999;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line = reader.readLine();
@@ -222,15 +262,15 @@ public class PanOptions extends JPanel {
             {
                 try {
                     int score = Integer.parseInt(line.trim());   // parse each line as an int
-                    if (score < highScore) // and keep track of the largest
+                    if (score <= highScore) // and keep track of the largest
                     {
                         highScore3 = highScore2;
                         highScore2 = highScore;
                         highScore = score;
-                    } else if (score < highScore2) {
+                    } else if (score <= highScore2) {
                         highScore3 = highScore2;
                         highScore2 = score;
-                    } else if (score < highScore3) {
+                    } else if (score <= highScore3) {
                         highScore3 = score;
                     }
                 } catch (NumberFormatException e1) {
@@ -245,12 +285,15 @@ public class PanOptions extends JPanel {
         }
     }
 
-    void AddScore(String file) {
+    void AddScore(int nScore) {
+        System.out.println("Adding... to " + (sDif + ".txt"));
         try {
-            BufferedWriter output = new BufferedWriter(new FileWriter(file, true));
+            BufferedWriter output = new BufferedWriter(new FileWriter((sDif + ".txt"), true));
+            output.append(Integer.toString(nScore));
             output.newLine();
-            output.append(" + points");
+            System.out.println("Adding... " + nScore);
             output.close();
+            System.out.println("Closing");
 
         } catch (IOException ex1) {
             System.out.printf("ERROR writing score to file: %s\n", ex1);
