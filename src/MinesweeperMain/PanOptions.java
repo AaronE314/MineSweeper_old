@@ -39,6 +39,9 @@ public class PanOptions extends JPanel {
         JButton NewGame = new JButton("New Game");
         String[] Difchoices = {"Easy", "Medium", "Hard", "Extreme", "Insanity"};
         String[] Colchoices = {"Gray", "Blue", "Green", "Orange"};
+        lbScore1 = new JLabel();
+        lbScore2 = new JLabel();
+        lbScore3 = new JLabel();
         cbDif = new JComboBox<String>(Difchoices);
         cbColour = new JComboBox<String>(Colchoices);
         cbDif.setVisible(true);
