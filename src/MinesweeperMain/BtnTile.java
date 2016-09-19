@@ -49,7 +49,7 @@ public class BtnTile extends JButton implements ActionListener {
         //Checking if flag mode is enabled
         if (!parentGrid.Flagon) {
             //if not it will play right sound and reveal the tile
-            if(isBomb){
+            if(isBomb && !parentGrid.FirstClick){
                 parentGrid.playSound("Long_Bomb.wav");
                 parentGrid.parent.panOptions.TimePassed.stop();
             }else if (!revealed){
